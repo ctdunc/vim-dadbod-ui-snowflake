@@ -135,6 +135,7 @@ let s:oracle_schemes_tables_query = "
       \ WHERE U.common = 'NO'
       \ ORDER BY T.table_name"
 let s:oracle = {
+      \   'callable': 'filter',
       \   'cell_line_number': 1,
       \   'cell_line_pattern': '^-\+\( \+-\+\)*',
       \   'default_scheme': '',
