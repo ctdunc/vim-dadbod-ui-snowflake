@@ -124,13 +124,8 @@ let s:oracle_args = join(
 
 function! s:get_oracle_queries()
   let common_condition = ""
-  let legacy = 0
 
-  if exists('g:is_oracle_legacy')
-    let legacy = g:is_oracle_legacy
-  endif
-
-  if !legacy
+  if !g:db_ui_is_oracle_legacy
     let common_condition = "AND U.common = 'NO'"
   endif
 
