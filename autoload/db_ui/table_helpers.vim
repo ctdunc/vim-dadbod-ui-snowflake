@@ -183,7 +183,7 @@ let s:sqlserver = {
 \   }
 
 let s:snowflake = {
-  \ 'List': 'select * from {schema}.{table}" limit 200',
+  \ 'List': 'select * from {schema}.{table} limit 200',
   \ 'Columns': 'describe table {schema}.{table}',
 \   }
 
