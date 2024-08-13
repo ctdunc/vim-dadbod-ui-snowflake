@@ -74,9 +74,14 @@ let s:sqlserver = {
       \   'select_foreign_key_query': 'select * from %s.%s where %s = %s',
       \   'cell_line_number': 2,
       \   'cell_line_pattern': '^-\+.-\+',
-      \   'parse_results': {results, min_len -> s:results_parser(results[0:-3], '|', min_len)},
-      \   'quote': 0,
+      \   'parse_results': {results, min_len -> s:results_parser(filter(results[0:-3], '!empty(v:val)')[1:-2], '|', min_len)},
       \   'default_scheme': 'dbo',
+      \ }
+let s:snowflake = {
+      \   'args': ['-o', 'friendly=false', '-o', 'timing=false', '-o', 'output_format=tsv', '-q'],
+      \   'schemes_query': 'SELECT schema_name FROM INFORMATION_SCHEMA.SCHEMATA',
+      \   'schemes_tables_query': 'select distinct * from (SELECT table_schema, table_name FROM INFORMATION_SCHEMA.TABLES UNION ALL SELECT table_schema, table_name from INFORMATION_SCHEMA.VIEWS)',
+      \   'parse_results': {results,min_len -> s:results_parser(results[1:], '\t' , min_len)},
       \ }
 
 let s:mysql_foreign_key_query =  "
@@ -181,6 +186,7 @@ let s:schemas = {
       \ 'mysql': s:mysql,
       \ 'oracle': s:oracle,
       \ 'bigquery': s:bigquery,
+      \ 'snowflake': s:snowflake,
       \ }
 
 if !exists('g:db_adapter_postgres')

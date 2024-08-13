@@ -48,7 +48,6 @@ function! db_ui#dbout#foldexpr(lnum) abort
     endif
     return 0
   endif
-
   return -1
 endfunction
 

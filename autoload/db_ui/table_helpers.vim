@@ -182,6 +182,11 @@ let s:sqlserver = {
       \ 'Describe': 'exec sp_help ''{schema}.{table}''',
 \   }
 
+let s:snowflake = {
+  \ 'List': 'select * from {schema}.{table}" limit 200',
+  \ 'Columns': 'describe table {schema}.{table}',
+\   }
+
 let s:helpers = {
       \ 'bigquery': s:bigquery,
       \ 'postgresql': s:postgres,
@@ -190,6 +195,7 @@ let s:helpers = {
       \ 'sqlite': s:sqlite,
       \ 'sqlserver': s:sqlserver,
       \ 'mongodb': { 'List': '{table}.find()'},
+      \ 'snowflake': s:snowflake,
       \  }
 
 let s:all = {}
